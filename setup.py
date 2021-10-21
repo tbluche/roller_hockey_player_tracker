@@ -2,7 +2,7 @@ import os
 from setuptools import setup, find_packages
 
 PACKAGE_NAME = "rhtrack"
-VERSION = "0.1.0"
+VERSION = "0.2.0"
 ROOT_PATH = os.path.dirname(os.path.abspath(__file__))
 PACKAGE_PATH = os.path.join(ROOT_PATH, PACKAGE_NAME)
 
@@ -16,14 +16,15 @@ def package_files(directory, subdir):
 
 
 install_requires = [
+    "matplotlib",
+    "numpy",
+    "opencv-contrib-python",
+    "scipy",
+    "sklearn",
     "torch",
     "torchvision",
-    "opencv-contrib-python",
     "tqdm",
     "youtube-dl",
-    "numpy",
-    "matplotlib",
-    "sklearn",
 ]
 
 

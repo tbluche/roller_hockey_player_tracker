@@ -6,6 +6,7 @@ import matplotlib.patches
 import numpy as np
 from tqdm import tqdm
 import cv2
+from scipy.spatial import ConvexHull
 from .trajectories import TrajectoryBuilder, save_trajectories, load_trajectories
 
 
@@ -26,9 +27,9 @@ def create_box(trajectories):
         frame_ids, detections = zip(*ts)
         frame_idx = frame_ids[0]
         assert all([f_idx == frame_idx for f_idx in frame_ids])
-        frame_to_box[frame_idx] = np.array(
-            [list(detection.middle()) for detection in detections]
-        )
+        points = np.array([list(detection.middle()) for detection in detections])
+        hull = ConvexHull(points)
+        frame_to_box[frame_idx] = points[hull.vertices, :]
     return frame_to_box
 
 
